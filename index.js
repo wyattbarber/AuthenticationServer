@@ -13,13 +13,13 @@ const firestore = new Firestore({
 exports.main = (req, res) => {
   try {
     // Load approved user data
-    const docRef = firestore.collection('Home Data').doc('Auth');
+    const docRef = firestore.collection('Home Data').doc();
     const doc = docRef.get();
     if (!doc.exists) {
       res.status(404).send({ error: 'Document not found' });
       return;
     }
-    const userData = authDoc.data()
+    const userData = doc.data()
 
     const clientOK = (req.query.client_id === userData.ClientID);
     const uriOK = (req.query.redirect_uri === 'https://oauth-redirect.googleusercontent.com/r/myhome-5f414');
