@@ -8,6 +8,7 @@
 firestore = require('./firestore');
 
 exports.main = (req, res) => {
+  logging.log('Authorization request recieved');
   // Load approved user data for given client id
   let userData;
   try {
