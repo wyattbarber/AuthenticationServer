@@ -15,7 +15,7 @@ exports.main = (req, res) => {
   const authDoc = firestore.collection('Home Data').doc('Auth').get();
   if (!doc.exists()) {
     res.status(404).send({error: 'Document not found'});
-    break;
+    return;
   }
   const userData = authDoc.data()
   
