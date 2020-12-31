@@ -5,13 +5,13 @@
  * @param {!express:Response} res HTTP response context.
  */
 
-import {getUserData} from './firestore.js';
+firestore = require('./firestore');
 
 exports.main = (req, res) => {
   // Load approved user data for given client id
   let userData;
   try {
-    userData = getUserData(req, res);
+    userData = firestore.getUserData(req, res);
   }
   catch (e) {
     return;
