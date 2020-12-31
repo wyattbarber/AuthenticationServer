@@ -1,4 +1,4 @@
-import { getUserData } from './firestore.ts';
+import { getUserData } from './firestore.js';
 
 
 /**

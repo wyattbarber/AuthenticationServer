@@ -10,7 +10,7 @@ db.settings(settings);
  * @param {!express:Request} req 
  * @param {!express:Response} res 
  */
-export async function getUserData(req, res): Promise<firebase.firestore.DocumentSnapshot> {
+export async function getUserData(req, res){
     const clientDoc = await db.collection('Home Data').doc(req.query.client_id).get();
     if (clientDoc.exists) {
         return clientDoc;
