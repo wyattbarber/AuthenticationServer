@@ -6,20 +6,21 @@
  */
 
 const Firestore = require('@google-cloud/firestore');
-const firestore = new Firestore({
-  projectId: 'decent-booster-285122',
-});
 
 exports.main = (req, res) => {
   try {
     // Load approved user data
+    const firestore = new Firestore({
+      projectId: 'decent-booster-285122',
+    });
+
     const collection = firestore.collection('Home Data');
     if (!collection.exists) {
       res.status(404).send({error: 'Collection not found'});
       return;
     }
     const docRef = collection.doc('Auth');
-    const doc = await docRef.get();
+    const doc = docRef.get();
     if (!doc.exists) {
       res.status(404).send({ error: 'Document not found' });
       return;
