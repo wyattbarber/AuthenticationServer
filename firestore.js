@@ -8,7 +8,8 @@ module.exports = {
     getUserData: async function(req, res) {
         const clientDoc = await db.collection('Home Data').doc(req.query.client_id).get();
         if (clientDoc.exists) {
-            return clientDoc;
+            const data = await clientDoc.data();
+            return data;
         }
         else {
             res.status(404).send({ error: 'Could not locate document for this client' });

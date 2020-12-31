@@ -10,18 +10,13 @@ firestore = require('./firestore');
 exports.main = (req, res) => {
   // Load approved user data for given client id
   let userData;
+  let AuthToken;
   try {
     userData = firestore.getUserData(req, res);
+    AuthToken = userData.AuthToken;
   }
   catch (e) {
     return;
-  }
-
-  // Get needed data
-  const AuthToken = userData.AuthToken;
-  if (AuthToken == undefined) {
-    res.status(404).send({
-      error: 'Could not read firestore data'});
   }
 
   // Validate data sent in request
