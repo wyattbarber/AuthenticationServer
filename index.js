@@ -35,7 +35,7 @@ exports.main = (req, res) => {
     else {
       res.status(404).send({
         error: 'Invalid client data: ' + req.query.client_id + ', ' + req.query.redirect_uri + '. '
-          + 'Firestore: ' + authDoc.toString() + ', ' + userData.toString()
+          + 'Firestore: ' + doc.toString() + ', ' + userData.toString()
       });
     }
   }
