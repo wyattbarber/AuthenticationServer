@@ -1,0 +1,7 @@
+{
+    "name": "authenticate-entrypoint",
+    "version": "0.0.1",
+    "dependencies": {
+      "@google-cloud/firestore": "^1.0.0"
+    }
+}
