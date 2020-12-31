@@ -19,10 +19,9 @@ exports.main = (req, res) => {
   }
 
   // Validate data sent in request
-  const clientOK = (req.query.client_id === userData.ClientID);
   const uriOK = (req.query.redirect_uri === 'https://oauth-redirect.googleusercontent.com/r/myhome-5f414');
 
-  if (clientOK && uriOK) {
+  if (uriOK) {
     let redirectAddr = req.query.redirect_uri;
     redirectAddr += '#access_token=' + userData.AuthToken.toString();
     redirectAddr += '&token_type=bearer';
