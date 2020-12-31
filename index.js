@@ -21,7 +21,7 @@ exports.main = (req, res) => {
   const AuthToken = userData.AuthToken;
   if (AuthToken == undefined) {
     res.status(404).send({
-      error: 'Invalid client data: ' + req.query.client_id + ', ' + req.query.redirect_uri});
+      error: 'Could not read firestore data'});
   }
 
   // Validate data sent in request
