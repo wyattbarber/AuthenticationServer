@@ -1,17 +1,17 @@
-import * as firebase from './firestore.js';
-
-
 /**
  * Responds to accont linking request from MyHome actions project.
  *
  * @param {!express:Request} req HTTP request context.
  * @param {!express:Response} res HTTP response context.
  */
+
+import {getUserData} from './firestore.js';
+
 exports.main = (req, res) => {
   // Load approved user data for given client id
   let userData;
   try {
-    userData = firebase.getUserData(req, res);
+    userData = getUserData(req, res);
   }
   catch (e) {
     return;
