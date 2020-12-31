@@ -26,7 +26,7 @@ exports.main = (req, res) => {
       let redirectAddr = req.query.redirect_uri;
       redirectAddr += '#access_token=' + userData.AuthToken.toString();
       redirectAddr += '&token_type=bearer';
-      redirectAddr += '&state=' + requestAnimationFrame.query.state.toString();
+      redirectAddr += '&state=' + req.query.state.toString();
 
       res.redirect(redirectAddr);
     }
