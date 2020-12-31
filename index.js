@@ -10,7 +10,7 @@ const firestore = new Firestore({
   projectId: 'My Project',
 });
 
-exports.authenticate = (req, res) => {
+exports.main = (req, res) => {
   // Load approved user data
   const userData = firestore.collection('Home Data')
     .doc('Auth')
