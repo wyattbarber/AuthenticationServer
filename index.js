@@ -18,7 +18,6 @@ exports.main = (req, res) => {
   }
 
   // Validate data sent in request
-
   try {
     const uriOK = (req.query.redirect_uri === 'https://oauth-redirect.googleusercontent.com/r/myhome-5f414');
 
