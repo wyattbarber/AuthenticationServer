@@ -1,4 +1,4 @@
-import * as firebase from './firestore';
+import {} from './firestore.ts';
 
 
 /**
