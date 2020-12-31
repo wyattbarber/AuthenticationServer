@@ -17,6 +17,7 @@ exports.main = (req, res) => {
     .get()
     .then(doc => {
       if (!(doc && doc.exists)){
+        console.err('Document not found.');
         res.status(404).send({error: 'Unable to find document.'});
         return '';
       }
