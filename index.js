@@ -12,24 +12,12 @@ const firestore = new Firestore({
 
 exports.main = (req, res) => {
   // Load approved user data
-  const userData = firestore.collection('Home Data')
-    .doc('Auth')
-    .get()
-    .then(doc => {
-      if (!(doc && doc.exists)){
-        console.err('Document not found.');
-        res.status(404).send({error: 'Unable to find document.'});
-        return '';
-      }
-      return doc.data();
-    }).catch(err => {
-      console.error(err);
-      res.status(404).send({error: 'Unable to retrieve document.'});
-      return '';
-    });
-  if (userData === '') {
-    return;
+  const authDoc = firestore.collection('Home Data').doc('Auth').get();
+  if (!doc.exists()) {
+    res.status(404).send({error: 'Document not found'});
+    break;
   }
+  const userData = authDoc.data()
   
   // compare against recieved data
   console.log(userData);
@@ -47,6 +35,6 @@ exports.main = (req, res) => {
   }
   else{
     res.status(404).send({error: 'Invalid client data: '+req.query.client_id+', '+req.query.redirect_uri+'. '
-    +'Firestore: '+userData});
+    +'Firestore: '+authDoc.toString()+', '+userData.toString()});
   }
 }
