@@ -1,4 +1,4 @@
-import {} from './firestore.ts';
+import { getUserData } from './firestore.ts';
 
 
 /**
@@ -9,8 +9,9 @@ import {} from './firestore.ts';
  */
 exports.main = (req, res) => {
   // Load approved user data for given client id
+  let userData;
   try {
-    const userData = firebase.getUserData(req, res);
+    userData = getUserData(req, res);
   }
   catch (e) {
     return;
