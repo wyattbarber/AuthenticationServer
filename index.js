@@ -14,7 +14,7 @@ exports.main = (req, res) => {
   try {
     // Load approved user data
     const authDoc = firestore.collection('Home Data').doc('Auth').get();
-    if (!doc.exists()) {
+    if (!authDoc.exists()) {
       res.status(404).send({ error: 'Document not found' });
       return;
     }
@@ -41,5 +41,4 @@ exports.main = (req, res) => {
   catch (e) {
     res.status(404).send({error: 'Exception thrown: '+e});
   }
-
 }
