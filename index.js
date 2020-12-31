@@ -18,7 +18,7 @@ exports.main = (req, res) => {
   }
 
   // Get needed data
-  const AuthToken = userData.get('AuthToken');
+  const AuthToken = userData.AuthToken;
   if (AuthToken == undefined) {
     res.status(404).send({
       error: 'Invalid client data: ' + req.query.client_id + ', ' + req.query.redirect_uri});
