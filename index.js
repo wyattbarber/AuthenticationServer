@@ -1,4 +1,4 @@
-import getUserData from './firestore.js';
+import * as firebase from './firestore.js';
 
 
 /**
@@ -11,7 +11,7 @@ exports.main = (req, res) => {
   // Load approved user data for given client id
   let userData;
   try {
-    userData = getUserData(req, res);
+    userData = firebase.getUserData(req, res);
   }
   catch (e) {
     return;
