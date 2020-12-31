@@ -7,7 +7,7 @@
 
 const Firestore = require('@google-cloud/firestore');
 const firestore = new Firestore({
-  projectId: 'My Project',
+  projectId: 'decent-booster-285122',
 });
 
 exports.main = (req, res) => {
