@@ -17,13 +17,19 @@ exports.main = (req, res) => {
     return;
   }
 
+  // Get needed data
+  const AuthToken = userData.get('AuthToken');
+  if (AuthToken == undefined) {
+    res.status(404).send({
+      error: 'Invalid client data: ' + req.query.client_id + ', ' + req.query.redirect_uri});
+  }
+
   // Validate data sent in request
   try {
     const uriOK = (req.query.redirect_uri === 'https://oauth-redirect.googleusercontent.com/r/myhome-5f414');
-
     if (uriOK) {
       let redirectAddr = req.query.redirect_uri;
-      redirectAddr += '#access_token=' + userData.AuthToken.toString();
+      redirectAddr += '#access_token=' + AuthToken.toString();
       redirectAddr += '&token_type=bearer';
       redirectAddr += '&state=' + req.query.state.toString();
 
