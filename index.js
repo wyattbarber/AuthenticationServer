@@ -13,7 +13,12 @@ const firestore = new Firestore({
 exports.main = (req, res) => {
   try {
     // Load approved user data
-    const docRef = firestore.collection('Home Data').doc();
+    const collection = firestore.collection("Home Data")
+    if (!collection.exists) {
+      res.status(404).send({error: 'Collection not found'});
+      return;
+    }
+    const docRef = collection.doc("Auth");
     const doc = docRef.get();
     if (!doc.exists) {
       res.status(404).send({ error: 'Document not found' });
