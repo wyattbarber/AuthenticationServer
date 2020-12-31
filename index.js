@@ -29,6 +29,8 @@ exports.main = (req, res) => {
     });
 
   // compare against recieved data
+  console.log(userData);
+
   const clientOK  = (req.query.client_id === userData.ClientID);
   const uriOK     = (req.query.redirect_uri === 'https://oauth-redirect.googleusercontent.com/r/myhome-5f414');
   
