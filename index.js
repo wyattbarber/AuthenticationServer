@@ -27,7 +27,10 @@ exports.main = (req, res) => {
       res.status(404).send({error: 'Unable to retrieve document.'});
       return '';
     });
-
+  if (userData === '') {
+    return;
+  }
+  
   // compare against recieved data
   console.log(userData);
 
@@ -44,6 +47,6 @@ exports.main = (req, res) => {
   }
   else{
     res.status(404).send({error: 'Invalid client data: '+req.query.client_id+', '+req.query.redirect_uri+'. '
-    +'Firestore: '+userData.ClientID});
+    +'Firestore: '+userData});
   }
 }
