@@ -63,15 +63,15 @@ exports.token = (req, res) => {
     if (grantType === 'authorization_code') {
       token = {
         token_type: 'bearer',
-        access_token: AuthToken,
-        refresh_token: AuthToken,
-        expires_in: secondsInDay,
+        access_token: token_value,
+        refresh_token: token_value,
+        expires_in: interval,
       };
     } else if (grantType === 'refresh_token') {
       token = {
         token_type: 'bearer',
-        access_token: AuthToken,
-        expires_in: secondsInDay,
+        access_token: token_value,
+        expires_in: interval,
       };
     }
     res.status(200).json(token)
