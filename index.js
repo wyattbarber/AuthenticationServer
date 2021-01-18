@@ -23,11 +23,11 @@ exports.authorize = (req, res) => {
   try {
     const uriOK = (req.query.redirect_uri === 'https://oauth-redirect.googleusercontent.com/r/myhome-5f414');
     if (uriOK) {
-      var responseUrl = req.query.redirect_uri;
+      var responseUrl = String(req.query.redirect_uri);
       responseUrl += '?code=';
-      responseUrl += AuthToken;
+      responseUrl += String(AuthToken);
       responseUrl += '&state=';
-      responseUrl += req.query.state;
+      responseUrl += String(req.query.state);
       res.redirect(responseUrl);
     }
     else {
