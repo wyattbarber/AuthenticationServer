@@ -1,11 +1,13 @@
+const firestore = require('./firestore');
+
+firestore = require('./firestore');
+
 /**
  * Responds to accont linking request from MyHome actions project.
  *
  * @param {!express:Request} req HTTP request context.
  * @param {!express:Response} res HTTP response context.
  */
-
-firestore = require('./firestore');
 
 exports.authorize = (req, res) => {
   // Load approved user data for given client id
@@ -41,6 +43,40 @@ exports.authorize = (req, res) => {
   }
 }
 
+/**
+ * Responds to token request/refresh requests.
+ *
+ * @param {!express:Request} req HTTP request context.
+ * @param {!express:Response} res HTTP response context.
+ */
 exports.token = (req, res) => {
+  try {
+    const grantType = req.query.grant_type
+      ? req.query.grant_type
+      : req.body.grant_type;
+    const interval = 86400;
 
+    const data = firestore.getUserData(req, res);
+    const token_value = data.AuthToken;
+
+    let token;
+    if (grantType === 'authorization_code') {
+      token = {
+        token_type: 'bearer',
+        access_token: AuthToken,
+        refresh_token: AuthToken,
+        expires_in: secondsInDay,
+      };
+    } else if (grantType === 'refresh_token') {
+      token = {
+        token_type: 'bearer',
+        access_token: AuthToken,
+        expires_in: secondsInDay,
+      };
+    }
+    res.status(200).json(token)
+  }
+  catch {
+    res.status(400).send("error: invalid token request")
+  }
 }
