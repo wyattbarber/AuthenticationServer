@@ -28,7 +28,7 @@ exports.authorize = (req, res) => {
       responseUrl += AuthToken;
       responseUrl += '?state=';
       responseUrl += req.query.state;
-      res.redirect(redirectUrl);
+      res.redirect(responseUrl);
     }
     else {
       res.status(404).send({
