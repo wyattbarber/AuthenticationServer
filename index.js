@@ -26,7 +26,7 @@ exports.authorize = (req, res) => {
       var responseUrl = req.query.redirect_uri;
       responseUrl += '?code=';
       responseUrl += AuthToken;
-      responseUrl += '?state=';
+      responseUrl += '&state=';
       responseUrl += req.query.state;
       res.redirect(responseUrl);
     }
