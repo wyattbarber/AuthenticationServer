@@ -23,12 +23,16 @@ exports.authorize = (req, res) => {
   try {
     const uriOK = (req.query.redirect_uri === 'https://oauth-redirect.googleusercontent.com/r/myhome-5f414');
     if (uriOK) {
-      let redirectAddr = req.query.redirect_uri;
-      redirectAddr += '#access_token=' + AuthToken;
-      redirectAddr += '&token_type=bearer';
-      redirectAddr += '&state=' + req.query.state;
+      const responseUrl = util.format(
+        decodeURIComponent(req.query.redirect_uri),
+        '?code=',
+        AuthToken,
+        '&state=',
+        req.query.state
+      );
+      const redirectUrl = encodeURIComponent(responseUrl);
 
-      res.redirect(redirectAddr);
+      res.redirect(redirectUrl);
     }
     else {
       res.status(404).send({
