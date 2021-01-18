@@ -1,7 +1,5 @@
 const firestore = require('./firestore');
 
-firestore = require('./firestore');
-
 /**
  * Responds to accont linking request from MyHome actions project.
  *
