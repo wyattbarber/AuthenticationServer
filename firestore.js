@@ -6,7 +6,11 @@ db.settings(settings);
 
 module.exports = {
     getUserData: async function(req, res) {
-        const clientDoc = await db.collection('Home Data').doc(req.query.client_id).get();
+        const client = req.query.client_id
+            ? req.query.client_id
+            : req.body.client_id;
+            
+        const clientDoc = await db.collection('Home Data').doc(client).get();
         if (clientDoc.exists) {
             const data = await clientDoc.data();
             return data;
