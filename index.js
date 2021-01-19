@@ -61,16 +61,18 @@ exports.token = (req, res) => {
     if (grantType === 'authorization_code') {
       token = {
         token_type: 'bearer',
-        access_token: token_value,
-        refresh_token: token_value,
-        expires_in: interval,
+        access_token: String(token_value),
+        refresh_token: String(token_value),
+        expires_in: String(interval),
       };
     } else if (grantType === 'refresh_token') {
       token = {
         token_type: 'bearer',
-        access_token: token_value,
-        expires_in: interval,
+        access_token: String(token_value),
+        expires_in: String(interval),
       };
+    } else {
+      res.status(400).send({"error":"invalid_grant"})
     }
     res.status(200).json(token)
   }
