@@ -54,27 +54,31 @@ exports.token = (req, res) => {
       : req.body.grant_type;
     const interval = 86400;
 
-    const data = firestore.getUserData(req, res);
-    const token_value = data.AuthToken;
-
-    let token;
-    if (grantType === 'authorization_code') {
-      token = {
-        token_type: 'bearer',
-        access_token: String(token_value),
-        refresh_token: String(token_value),
-        expires_in: String(interval),
-      };
-    } else if (grantType === 'refresh_token') {
-      token = {
-        token_type: 'bearer',
-        access_token: String(token_value),
-        expires_in: String(interval),
-      };
-    } else {
-      res.status(400).send({"error":"invalid_grant"})
-    }
-    res.status(200).json(token)
+    firestore.getUserData(req, res)
+      .then((data) => {
+        const token_value = data.AuthToken;
+        let token;
+        if (grantType === 'authorization_code') {
+          token = {
+            token_type: 'bearer',
+            access_token: token_value,
+            refresh_token: token_value,
+            expires_in: interval
+          };
+        } else if (grantType === 'refresh_token') {
+          token = {
+            token_type: 'bearer',
+            access_token: token_value,
+            expires_in: interval
+          };
+        } else {
+          res.status(400).send({ "error": "invalid_grant" })
+        }
+        res.status(200).json(token)
+      })
+      .catch((e) => {
+        res.status(400).send({"error": "invalid_client"});
+      });
   }
   catch {
     res.status(400).send("error: invalid token request")
